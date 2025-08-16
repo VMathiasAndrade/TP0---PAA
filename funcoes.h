@@ -9,5 +9,8 @@ extern char quadro[LINHAS][COLUNAS];
 void inicializar_quadro();
 void desenhar_bordas();
 void imprimir_quadro();
+void desenho_simples();
+void desenho_soma();
+void desenho_x();
 
 #endif

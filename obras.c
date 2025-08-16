@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdlib.h>
 #include <time.h>
 #include "funcoes.h"
-
-#define LINHAS 20
-#define COLUNAS 80
 
 int main()
 {
@@ -39,6 +35,32 @@ int main()
     inicializar_quadro();
     desenhar_bordas();
     imprimir_quadro();
+
+    int linha, col;
+
+    switch (tipo)
+    {
+    case 1:
+        linha = rand() % 18 + 1;
+        col = rand() % 78 + 1;
+        desenho_simples(linha, col);
+        break;
+
+    case 2:
+        linha = rand() % 16 + 2;
+        col = rand() % 76 + 2;
+        desenho_simples(linha, col);
+        break;
+
+    case 3:
+        linha = rand() % 16 + 2;
+        col = rand() % 76 + 2;
+        desenho_simples(linha, col);
+        break;
+
+    default:
+        break;
+    }
 
     return 0;
 }
