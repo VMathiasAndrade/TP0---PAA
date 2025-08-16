@@ -34,33 +34,61 @@ int main()
 
     inicializar_quadro();
     desenhar_bordas();
-    imprimir_quadro();
 
-    int linha, col;
-
-    switch (tipo)
+    srand(time(NULL));
+    for (int i = 0; i < qtd; i++)
     {
-    case 1:
-        linha = rand() % 18 + 1;
-        col = rand() % 78 + 1;
-        desenho_simples(linha, col);
-        break;
+        int linha, col;
 
-    case 2:
-        linha = rand() % 16 + 2;
-        col = rand() % 76 + 2;
-        desenho_simples(linha, col);
-        break;
+        switch (tipo)
+        {
+        case 1:
+            linha = rand() % 18 + 1;
+            col = rand() % 78 + 1;
+            desenho_simples(linha, col);
+            break;
 
-    case 3:
-        linha = rand() % 16 + 2;
-        col = rand() % 76 + 2;
-        desenho_simples(linha, col);
-        break;
+        case 2:
+            linha = rand() % 16 + 2;
+            col = rand() % 76 + 2;
+            desenho_soma(linha, col);
+            break;
 
-    default:
-        break;
+        case 3:
+            linha = rand() % 16 + 2;
+            col = rand() % 76 + 2;
+            desenho_x(linha, col);
+            break;
+
+        default:
+            break;
+
+        case 4:
+        {
+            int aleatorio = rand() % 3 + 1;
+
+            switch (aleatorio)
+            {
+            case 1:
+                linha = rand() % 18 + 1;
+                col = rand() % 78 + 1;
+                desenho_simples(linha, col);
+                break;
+            case 2:
+                linha = rand() % 16 + 2;
+                col = rand() % 76 + 2;
+                desenho_soma(linha, col);
+                break;
+            case 3:
+                linha = rand() % 16 + 2;
+                col = rand() % 76 + 2;
+                desenho_x(linha, col);
+                break;
+            }
+            break;
+        }
+        }
     }
-
+    imprimir_quadro();
     return 0;
 }
