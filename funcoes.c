@@ -80,3 +80,29 @@ void desenho_x(int linha, int col)
         quadro[linha + 2][col + 2] = '*';
     }
 }
+
+void EstrelaDeDavi(int linha, int col)
+{
+    if (linha >= 3 && linha <= LINHAS - 5 && col >= 3 && col <= COLUNAS - 5)
+    {
+
+        quadro[linha][col + 3] = '*';
+        quadro[linha + 1][col + 2] = '*';
+        quadro[linha + 1][col + 4] = '*';
+        quadro[linha + 2][col + 1] = '*';
+        quadro[linha + 2][col + 5] = '*';
+
+        for (int i = 0; i <= 6; i++)
+        {
+            quadro[linha + 3][col + i] = '*';
+        }
+
+        quadro[linha + 1][col + 1] = '*';
+        quadro[linha + 1][col + 5] = '*';
+        quadro[linha + 1][col + 6] = '*';
+        quadro[linha + 1][col] = '*';
+        quadro[linha + 3][col + 2] = '*';
+        quadro[linha + 3][col + 1] = '*';
+        quadro[linha + 4][col + 3] = '*';
+    }
+}

@@ -14,7 +14,7 @@ int main()
     printf("2 - simbolo de soma com asteriscos\n");
     printf("3 - letra X com asteriscos\n");
     printf("4 - figuras aleatorias\n");
-    printf("5 ou qualquer outro numero - opcao criada pelo aluno\n");
+    printf("5 ou qualquer outro numero - Estrela de Davi\n");
     printf("Digite o tipo de figura basica desejada: ");
     scanf("%d", &tipo);
 
@@ -60,9 +60,6 @@ int main()
             desenho_x(linha, col);
             break;
 
-        default:
-            break;
-
         case 4:
         {
             int aleatorio = rand() % 3 + 1;
@@ -84,9 +81,27 @@ int main()
                 col = rand() % 76 + 2;
                 desenho_x(linha, col);
                 break;
+
+            case 5:
+
+                linha = rand() % 12 + 3; 
+                col = rand() % 68 + 5;   
+                EstrelaDeDavi(linha, col);
+                break;
             }
             break;
         }
+        case 5:
+
+            linha = rand() % 12 + 3; // Entre linha 3 e 16 (para caber a estrela)
+            col = rand() % 68 + 5;   // Entre coluna 5 e 74 (para caber a estrela)
+            EstrelaDeDavi(linha, col);
+            break;
+        default:
+            linha = rand() % 12 + 3;
+            col = rand() % 68 + 5;
+            EstrelaDeDavi(linha, col);
+            break;
         }
     }
     imprimir_quadro();

@@ -12,5 +12,8 @@ void imprimir_quadro();
 void desenho_simples(int linha, int col);
 void desenho_soma(int linha, int col);
 void desenho_x(int linha, int col);
+void EstrelaDeDavi(int linha, int col);
+
+int VerificaArea(int linha, int col, int tipo);
 
 #endif
