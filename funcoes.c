@@ -100,9 +100,77 @@ void EstrelaDeDavi(int linha, int col)
         quadro[linha + 1][col + 1] = '*';
         quadro[linha + 1][col + 5] = '*';
         quadro[linha + 1][col + 6] = '*';
+        quadro[linha + 1][col + 3] = '*';
         quadro[linha + 1][col] = '*';
         quadro[linha + 3][col + 2] = '*';
         quadro[linha + 3][col + 1] = '*';
         quadro[linha + 4][col + 3] = '*';
     }
+}
+
+int VerificaArea(int linha, int col, int tipo)
+{
+
+    switch (tipo)
+    {
+    case 1:
+        if (quadro[linha][col] != ' ')
+            return 0;
+        break;
+
+    case 2:
+        if (linha + 2 >= LINHAS - 1 || col + 2 >= COLUNAS - 1)
+            return 0;
+        if (quadro[linha][col + 1] != ' ' ||
+            quadro[linha + 1][col] != ' ' ||
+            quadro[linha + 1][col + 1] != ' ' ||
+            quadro[linha + 1][col + 2] != ' ' ||
+            quadro[linha + 2][col + 1] != ' ')
+            return 0;
+        break;
+
+    case 3:
+        if (linha + 2 >= LINHAS - 1 || col + 2 >= COLUNAS - 1)
+            return 0;
+        if (quadro[linha][col] != ' ' ||
+            quadro[linha][col + 2] != ' ' ||
+            quadro[linha + 1][col + 1] != ' ' ||
+            quadro[linha + 2][col] != ' ' ||
+            quadro[linha + 2][col + 2] != ' ')
+            return 0;
+        break;
+
+    case 5:
+        if (linha + 4 >= LINHAS - 1 || col + 6 >= COLUNAS - 1)
+            return 0;
+        if (quadro[linha][col + 3] != ' ')
+            return 0;
+
+        if (quadro[linha + 1][col + 2] != ' ' ||
+            quadro[linha + 1][col + 4] != ' ' ||
+            quadro[linha + 1][col + 1] != ' ' ||
+            quadro[linha + 1][col + 5] != ' ' ||
+            quadro[linha + 1][col + 6] != ' ' ||
+            quadro[linha + 1][col + 3] != ' ' ||
+            quadro[linha + 1][col] != ' ')
+            return 0;
+
+        if (quadro[linha + 2][col + 1] != ' ' ||
+            quadro[linha + 2][col + 5] != ' ')
+            return 0;
+
+        for (int i = 0; i <= 6; i++)
+        {
+            if (quadro[linha + 3][col + i] != ' ')
+                return 0;
+        }
+
+        if (quadro[linha + 4][col + 3] != ' ')
+            return 0;
+        break;
+
+    default:
+        return 0;
+    }
+    return 1;
 }
