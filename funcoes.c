@@ -85,7 +85,6 @@ void EstrelaDeDavi(int linha, int col)
 {
     if (linha >= 3 && linha <= LINHAS - 5 && col >= 3 && col <= COLUNAS - 5)
     {
-
         quadro[linha][col + 3] = '*';
         quadro[linha + 1][col + 2] = '*';
         quadro[linha + 1][col + 4] = '*';
@@ -100,7 +99,6 @@ void EstrelaDeDavi(int linha, int col)
         quadro[linha + 1][col + 1] = '*';
         quadro[linha + 1][col + 5] = '*';
         quadro[linha + 1][col + 6] = '*';
-        quadro[linha + 1][col + 3] = '*';
         quadro[linha + 1][col] = '*';
         quadro[linha + 3][col + 2] = '*';
         quadro[linha + 3][col + 1] = '*';
@@ -110,67 +108,47 @@ void EstrelaDeDavi(int linha, int col)
 
 int VerificaArea(int linha, int col, int tipo)
 {
-
     switch (tipo)
     {
-    case 1:
-        if (quadro[linha][col] != ' ')
-            return 0;
+    case 1: // Asterisco simples
+        if (linha >= 1 && linha < LINHAS - 1 && col >= 1 && col < COLUNAS - 1)
+            return (quadro[linha][col] == ' ') ? 1 : 0;
         break;
 
-    case 2:
-        if (linha + 2 >= LINHAS - 1 || col + 2 >= COLUNAS - 1)
-            return 0;
-        if (quadro[linha][col + 1] != ' ' ||
-            quadro[linha + 1][col] != ' ' ||
-            quadro[linha + 1][col + 1] != ' ' ||
-            quadro[linha + 1][col + 2] != ' ' ||
-            quadro[linha + 2][col + 1] != ' ')
-            return 0;
-        break;
-
-    case 3:
-        if (linha + 2 >= LINHAS - 1 || col + 2 >= COLUNAS - 1)
-            return 0;
-        if (quadro[linha][col] != ' ' ||
-            quadro[linha][col + 2] != ' ' ||
-            quadro[linha + 1][col + 1] != ' ' ||
-            quadro[linha + 2][col] != ' ' ||
-            quadro[linha + 2][col + 2] != ' ')
-            return 0;
-        break;
-
-    case 5:
-        if (linha + 4 >= LINHAS - 1 || col + 6 >= COLUNAS - 1)
-            return 0;
-        if (quadro[linha][col + 3] != ' ')
-            return 0;
-
-        if (quadro[linha + 1][col + 2] != ' ' ||
-            quadro[linha + 1][col + 4] != ' ' ||
-            quadro[linha + 1][col + 1] != ' ' ||
-            quadro[linha + 1][col + 5] != ' ' ||
-            quadro[linha + 1][col + 6] != ' ' ||
-            quadro[linha + 1][col + 3] != ' ' ||
-            quadro[linha + 1][col] != ' ')
-            return 0;
-
-        if (quadro[linha + 2][col + 1] != ' ' ||
-            quadro[linha + 2][col + 5] != ' ')
-            return 0;
-
-        for (int i = 0; i <= 6; i++)
+    case 2: // Símbolo de soma
+        if (linha >= 1 && linha < LINHAS - 3 && col >= 1 && col < COLUNAS - 3)
         {
-            if (quadro[linha + 3][col + i] != ' ')
-                return 0;
+            if (quadro[linha][col + 1] == ' ' &&
+                quadro[linha + 1][col] == ' ' &&
+                quadro[linha + 1][col + 1] == ' ' &&
+                quadro[linha + 1][col + 2] == ' ' &&
+                quadro[linha + 2][col + 1] == ' ')
+                return 1;
         }
-
-        if (quadro[linha + 4][col + 3] != ' ')
-            return 0;
         break;
 
-    default:
-        return 0;
+    case 3: // Letra X
+        if (linha >= 1 && linha < LINHAS - 3 && col >= 1 && col < COLUNAS - 3)
+        {
+            if (quadro[linha][col] == ' ' &&
+                quadro[linha][col + 2] == ' ' &&
+                quadro[linha + 1][col + 1] == ' ' &&
+                quadro[linha + 2][col] == ' ' &&
+                quadro[linha + 2][col + 2] == ' ')
+                return 1;
+        }
+        break;
+
+    case 5: // Estrela de Davi
+        if (linha >= 1 && linha < LINHAS - 5 && col >= 1 && col < COLUNAS - 7)
+        {
+            // Verifica algumas posições chave da sua estrela
+            if (quadro[linha][col + 3] == ' ' &&
+                quadro[linha + 1][col + 2] == ' ' &&
+                quadro[linha + 4][col + 3] == ' ')
+                return 1;
+        }
+        break;
     }
-    return 1;
+    return 0;
 }

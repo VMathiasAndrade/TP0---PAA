@@ -6,6 +6,8 @@
 int main()
 {
     int tipo, qtd;
+    char refazer;
+
     printf("PROGRAMA GERADOR DE OBRA DE ARTE: \n");
     printf("=================================\n");
     printf("Escolha o tipo de figura basica a ser usada para criar a obra: \n");
@@ -29,107 +31,101 @@ int main()
     {
         qtd = 100;
     }
-    printf("\nValores escolhidos: tipo = %d | quantidade = %d\n", tipo, qtd);
-
-    inicializar_quadro();
-    desenhar_bordas();
 
     srand(time(NULL));
-    int figuras_colocadas = 0;
 
-    // Para cada figura
-    for (int i = 0; i < qtd; i++)
+    do
     {
-        int tentativas = 0;
-        int figura_desenhada = 0;
+        printf("\nValores escolhidos: tipo = %d | quantidade = %d\n", tipo, qtd);
 
-        // Repetir até desenhar a figura ou desistir
-        while (!figura_desenhada && tentativas <= 100)
+        inicializar_quadro();
+        desenhar_bordas();
+
+        int figuras_colocadas = 0;
+
+        // Para cada figura com detecção de colisão
+        for (int i = 0; i < qtd; i++)
         {
-            int linha, col, tipo_figura;
+            int tentativas = 0;
+            int figura_desenhada = 0;
 
-            // Determina o tipo de figura a ser desenhada
-            if (tipo == 4)
+            while (!figura_desenhada && tentativas < 50)
             {
-                int aleatorio = rand() % 4 + 1; // 1, 2, 3 ou 4 para figuras aleatórias
-                if (aleatorio == 4)
+                int linha, col, tipo_figura;
+
+                // Determina o tipo de figura
+                if (tipo == 4)
                 {
-                    tipo_figura = 5; // Estrela de Davi
+                    int aleatorio = rand() % 4 + 1;
+                    tipo_figura = (aleatorio == 4) ? 5 : aleatorio;
                 }
                 else
                 {
-                    tipo_figura = aleatorio; // 1, 2 ou 3
+                    tipo_figura = tipo;
                 }
-            }
-            else
-            {
-                tipo_figura = tipo;
-            }
 
-            // Gerar posição aleatória baseada no tipo de figura
-            switch (tipo_figura)
-            {
-            case 1:                                // Asterisco simples
-                linha = rand() % (LINHAS - 2) + 1; // Entre 1 e 18
-                col = rand() % (COLUNAS - 2) + 1;  // Entre 1 e 78
-                break;
-
-            case 2:                                // Símbolo de soma
-                linha = rand() % (LINHAS - 4) + 1; // Entre 1 e 16
-                col = rand() % (COLUNAS - 4) + 1;  // Entre 1 e 76
-                break;
-
-            case 3:                                // Letra X
-                linha = rand() % (LINHAS - 4) + 1; // Entre 1 e 16
-                col = rand() % (COLUNAS - 4) + 1;  // Entre 1 e 76
-                break;
-
-            case 5: // Estrela de Davi
-            default:
-                linha = rand() % (LINHAS - 6) + 1; // Entre 1 e 14
-                col = rand() % (COLUNAS - 8) + 1;  // Entre 1 e 72
-                tipo_figura = 5;
-                break;
-            }
-
-            // Se área está livre
-            if (VerificaArea(linha, col, tipo_figura))
-            {
-                // Desenhar figura
+                // Gera posição baseada no tipo
                 switch (tipo_figura)
                 {
                 case 1:
-                    desenho_simples(linha, col);
+                    linha = rand() % 18 + 1;
+                    col = rand() % 78 + 1;
                     break;
                 case 2:
-                    desenho_soma(linha, col);
+                    linha = rand() % 16 + 2;
+                    col = rand() % 76 + 2;
                     break;
                 case 3:
-                    desenho_x(linha, col);
+                    linha = rand() % 16 + 2;
+                    col = rand() % 76 + 2;
                     break;
                 case 5:
-                    EstrelaDeDavi(linha, col);
+                default:
+                    linha = rand() % 12 + 3;
+                    col = rand() % 68 + 5;
+                    tipo_figura = 5;
                     break;
                 }
-                figura_desenhada = 1; // Sair do loop
-                figuras_colocadas++;
-            }
-            else
-            {
-                // Senão: tentativas++
-                tentativas++;
-            }
 
-            // Se tentativas > 100: desistir desta figura
-            if (tentativas > 100)
-            {
-                break; // Desiste desta figura e vai para a próxima
+                // Verifica se área está livre
+                if (VerificaArea(linha, col, tipo_figura))
+                {
+                    // Desenha a figura
+                    switch (tipo_figura)
+                    {
+                    case 1:
+                        desenho_simples(linha, col);
+                        break;
+                    case 2:
+                        desenho_soma(linha, col);
+                        break;
+                    case 3:
+                        desenho_x(linha, col);
+                        break;
+                    case 5:
+                        EstrelaDeDavi(linha, col);
+                        break;
+                    }
+                    figura_desenhada = 1;
+                    figuras_colocadas++;
+                }
+                else
+                {
+                    tentativas++;
+                }
             }
         }
-    }
 
-    printf("Figuras colocadas com sucesso: %d de %d solicitadas\n", figuras_colocadas, qtd);
+        printf("Figuras colocadas: %d de %d solicitadas\n", figuras_colocadas, qtd);
 
-    imprimir_quadro();
+        imprimir_quadro();
+
+        // Pergunta se quer refazer
+        printf("\nDeseja gerar um novo quadro com os mesmos parametros? (s/n): ");
+        scanf(" %c", &refazer);
+
+    } while (refazer == 's' || refazer == 'S');
+
+    printf("\nObrigado por usar o gerador de obras de arte!\n");
     return 0;
 }
