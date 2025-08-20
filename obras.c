@@ -15,7 +15,7 @@ int main()
     printf("2 - simbolo de soma com asteriscos\n");
     printf("3 - letra X com asteriscos\n");
     printf("4 - figuras aleatorias\n");
-    printf("5 ou qualquer outro numero - Estrela de Davi\n");
+    printf("5 ou qualquer outro numero - Letra J\n");
     printf("Digite o tipo de figura basica desejada: ");
     scanf("%d", &tipo);
 
@@ -43,7 +43,6 @@ int main()
 
         int figuras_colocadas = 0;
 
-        // Para cada figura com detecção de colisão
         for (int i = 0; i < qtd; i++)
         {
             int tentativas = 0;
@@ -53,7 +52,6 @@ int main()
             {
                 int linha, col, tipo_figura;
 
-                // Determina o tipo de figura
                 if (tipo == 4)
                 {
                     int aleatorio = rand() % 4 + 1;
@@ -64,7 +62,6 @@ int main()
                     tipo_figura = tipo;
                 }
 
-                // Gera posição baseada no tipo
                 switch (tipo_figura)
                 {
                 case 1:
@@ -81,16 +78,14 @@ int main()
                     break;
                 case 5:
                 default:
-                    linha = rand() % 12 + 3;
-                    col = rand() % 68 + 5;
+                    linha = rand() % 16 + 2;
+                    col = rand() % 76 + 2;
                     tipo_figura = 5;
                     break;
                 }
 
-                // Verifica se área está livre
                 if (VerificaArea(linha, col, tipo_figura))
                 {
-                    // Desenha a figura
                     switch (tipo_figura)
                     {
                     case 1:
@@ -103,7 +98,7 @@ int main()
                         desenho_x(linha, col);
                         break;
                     case 5:
-                        EstrelaDeDavi(linha, col);
+                        LetraJ(linha, col);
                         break;
                     }
                     figura_desenhada = 1;
@@ -120,7 +115,6 @@ int main()
 
         imprimir_quadro();
 
-        // Pergunta se quer refazer
         printf("\nDeseja gerar um novo quadro com os mesmos parametros? (s/n): ");
         scanf(" %c", &refazer);
 

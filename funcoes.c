@@ -81,28 +81,16 @@ void desenho_x(int linha, int col)
     }
 }
 
-void EstrelaDeDavi(int linha, int col)
+void LetraJ(int linha, int col)
 {
-    if (linha >= 3 && linha <= LINHAS - 5 && col >= 3 && col <= COLUNAS - 5)
+    if (linha >= 1 && linha <= LINHAS - 4 && col >= 1 && col <= COLUNAS - 4)
     {
-        quadro[linha][col + 3] = '*';
+        quadro[linha][col] = '*';
+        quadro[linha][col + 1] = '*';
+        quadro[linha][col + 2] = '*';
         quadro[linha + 1][col + 2] = '*';
-        quadro[linha + 1][col + 4] = '*';
-        quadro[linha + 2][col + 1] = '*';
-        quadro[linha + 2][col + 5] = '*';
-
-        for (int i = 0; i <= 6; i++)
-        {
-            quadro[linha + 3][col + i] = '*';
-        }
-
-        quadro[linha + 1][col + 1] = '*';
-        quadro[linha + 1][col + 5] = '*';
-        quadro[linha + 1][col + 6] = '*';
-        quadro[linha + 1][col] = '*';
-        quadro[linha + 3][col + 2] = '*';
-        quadro[linha + 3][col + 1] = '*';
-        quadro[linha + 4][col + 3] = '*';
+        quadro[linha + 2][col] = '*';
+        quadro[linha + 2][col + 2] = '*';
     }
 }
 
@@ -110,12 +98,12 @@ int VerificaArea(int linha, int col, int tipo)
 {
     switch (tipo)
     {
-    case 1: // Asterisco simples
+    case 1:
         if (linha >= 1 && linha < LINHAS - 1 && col >= 1 && col < COLUNAS - 1)
             return (quadro[linha][col] == ' ') ? 1 : 0;
         break;
 
-    case 2: // Símbolo de soma
+    case 2:
         if (linha >= 1 && linha < LINHAS - 3 && col >= 1 && col < COLUNAS - 3)
         {
             if (quadro[linha][col + 1] == ' ' &&
@@ -127,7 +115,7 @@ int VerificaArea(int linha, int col, int tipo)
         }
         break;
 
-    case 3: // Letra X
+    case 3:
         if (linha >= 1 && linha < LINHAS - 3 && col >= 1 && col < COLUNAS - 3)
         {
             if (quadro[linha][col] == ' ' &&
@@ -139,13 +127,15 @@ int VerificaArea(int linha, int col, int tipo)
         }
         break;
 
-    case 5: // Estrela de Davi
-        if (linha >= 1 && linha < LINHAS - 5 && col >= 1 && col < COLUNAS - 7)
+    case 5:
+        if (linha >= 1 && linha < LINHAS - 3 && col >= 1 && col < COLUNAS - 3)
         {
-            // Verifica algumas posições chave da sua estrela
-            if (quadro[linha][col + 3] == ' ' &&
+            if (quadro[linha][col] == ' ' &&
+                quadro[linha][col + 1] == ' ' &&
+                quadro[linha][col + 2] == ' ' &&
                 quadro[linha + 1][col + 2] == ' ' &&
-                quadro[linha + 4][col + 3] == ' ')
+                quadro[linha + 2][col] == ' ' &&
+                quadro[linha + 2][col + 2] == ' ')
                 return 1;
         }
         break;
